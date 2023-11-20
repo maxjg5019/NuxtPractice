@@ -43,3 +43,7 @@ npm run preview
 # yarn
 yarn preview
 ```
+
+```
+node version 18.18.0
+```
