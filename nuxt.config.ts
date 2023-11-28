@@ -1,8 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  nitro:{
+    plugins:['@/server/index.ts']
+  },
   runtimeConfig: {
-    MONGODB_URI: process.env.MONGODB_URI,
+    MONGODB_URI: process.env.MONGODB_URL,
   },
   typescript: { typeCheck: true },
 });
