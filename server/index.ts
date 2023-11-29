@@ -1,11 +1,16 @@
-import mongoose from "mongoose";
+import { MongoClient } from 'mongodb';
 
-export default async () =>  {
-    const config = useRuntimeConfig();
-    try {
-        await mongoose.connect(config.MONGODB_URI);
-        console.log('DB 連線成功')
-    }catch(err){
-        console.error('DB 連線失敗', err);
-    }
+const config = useRuntimeConfig();
+const client = new MongoClient(config.MONGODB_URI);
+const dbName = 'dbFinal';
+
+export default async () => {
+  try {
+    await client.connect();
+    console.log('連線成功');
+    const db = client.db(dbName);
+    const collection = db.collection('user');
+  } catch (err) {
+    console.log('連線失敗', err);
+  };
 };
