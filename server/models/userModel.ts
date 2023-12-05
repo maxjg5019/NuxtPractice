@@ -1,12 +1,13 @@
+import { ObjectId } from "mongodb";
+
 export interface user {
-  email: string;
   name: string;
-  type: usertype;
   studentId: string;
+  usertype: usertype;
+  password: string;
 }
 
 export enum usertype {
   professor,
-  master,
-  bechelor,
+  student,
 }

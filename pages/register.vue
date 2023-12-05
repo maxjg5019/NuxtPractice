@@ -27,9 +27,12 @@ const onFinishFailed = (errorInfo: any) => {
 <template>
     <div class="form-container">
         <a-form :model="userData" name="login" autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
-            <h2 style="letter-spacing: 0.1em;">實驗室成員課程表系統</h2>
-            <h2 style="letter-spacing: 0.1em;">登入後查看或新增課表</h2>
+            <h2 style="letter-spacing: 0.1em;">註冊後登入</h2>
             <a-divider />
+            <a-form-item label="姓名" name="name" :rules="[{ required: true, message: '請輸入你的姓名' }]">
+                <a-input v-model:value="userData.studentId" style="width: 488px;" />
+            </a-form-item>
+
             <a-form-item label="帳號" name="studentId" :rules="[{ required: true, message: '請輸入你的帳號' }]">
                 <a-input v-model:value="userData.studentId" style="width: 488px;" />
             </a-form-item>

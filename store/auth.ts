@@ -11,13 +11,11 @@ export const useUserStore = defineStore('user', {
     data: null,
   }),
   actions: {
-    login(userData: any) {
-      this.isAuthenticated = true;
-      this.data = userData;
+    userLogin(){
+      
     },
-    logout() {
-      this.isAuthenticated = false;
-      this.data = null;
+    userLogout(){
+      
     },
   },
 });
