@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@ant-design-vue/nuxt', '@pinia/nuxt'],
+  modules: ['@ant-design-vue/nuxt', '@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
   nitro: {
     plugins: ['@/server/index'],
   },
