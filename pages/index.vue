@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { user } from '~/server/models/userModel';
+
 </script>
 
 <template>

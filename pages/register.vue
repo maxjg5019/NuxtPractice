@@ -1,20 +1,19 @@
 <script lang="ts" setup>
-import type { formState as userData } from '~/composables/api/user';
+import type { registerFormState } from '~/composables/api/user';
 definePageMeta({
     layout: false,
 })
 
 
-const userData = ref<userData>({
+const userData = ref<registerFormState>({
+    name: '',
     studentId: '',
     password: '',
-    userType: '0',
 });
 const onFinish = (Info: any) => {
-    const userTypeEnum = parseInt(Info.userType, 10);
     //這邊嗎
-    message.success('登入成功');
-    console.log('Success:', Info, userTypeEnum);
+    message.success('註冊成功');
+    console.log('Success:', Info);
 };
 
 const onFinishFailed = (errorInfo: any) => {
@@ -27,10 +26,10 @@ const onFinishFailed = (errorInfo: any) => {
 <template>
     <div class="form-container">
         <a-form :model="userData" name="login" autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
-            <h2 style="letter-spacing: 0.1em;">註冊後登入</h2>
+            <h2 style="letter-spacing: 0.1em;">學生註冊</h2>
             <a-divider />
             <a-form-item label="姓名" name="name" :rules="[{ required: true, message: '請輸入你的姓名' }]">
-                <a-input v-model:value="userData.studentId" style="width: 488px;" />
+                <a-input v-model:value="userData.name" style="width: 488px;" />
             </a-form-item>
 
             <a-form-item label="帳號" name="studentId" :rules="[{ required: true, message: '請輸入你的帳號' }]">
@@ -41,15 +40,8 @@ const onFinishFailed = (errorInfo: any) => {
                 <a-input-password v-model:value="userData.password" style="width: 488px;" />
             </a-form-item>
 
-            <a-form-item label="登入身份" name="userType">
-                <a-radio-group v-model:value="userData.userType" name="radioGroup">
-                    <a-radio value="0">教授</a-radio>
-                    <a-radio value="1">學生</a-radio>
-                </a-radio-group>
-            </a-form-item>
-
             <a-form-item :wrapper-col="{ offset: 2, span: 16 }">
-                <a-button type="primary" html-type="submit">送出</a-button>
+                <a-button type="primary" html-type="submit">註冊</a-button>
             </a-form-item>
 
         </a-form>
