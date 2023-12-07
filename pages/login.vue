@@ -11,15 +11,15 @@ const userData = ref<loginformState>({
     password: '',
 });
 const onFinish = async (Info: any) => {
-        const result = await userLogin(Info);
-    if (result) {
-        message.success('登入成功');
+    const result = await userLogin(Info);
+    if (result?.success) {
+        message.success(result.message);
         console.log('Success:', Info);
     } else {
-        message.error('登入失敗');
+        message.error(result?.message);
         console.log('Failed:', Info);
     }
-    
+
 };
 
 const onFinishFailed = (errorInfo: any) => {

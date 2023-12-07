@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import type { registerFormState } from '~/composables/api/user';
+import { userRegister } from '~/composables/api/user';
+
 definePageMeta({
     layout: false,
 })
@@ -10,10 +12,15 @@ const userData = ref<registerFormState>({
     studentId: '',
     password: '',
 });
-const onFinish = (Info: any) => {
-    //這邊嗎
-    message.success('註冊成功');
-    console.log('Success:', Info);
+const onFinish = async (Info: any) => {
+    const result = await userRegister(Info);
+    if(result?.success){
+        message.success(result.message);
+        console.log('Success:', Info);
+    }else{
+        message.error(result?.message);
+        console.log('Failed:', Info);
+    }
 };
 
 const onFinishFailed = (errorInfo: any) => {

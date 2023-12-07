@@ -11,11 +11,11 @@ export default defineEventHandler(async (event) => {
   try {
     const db = client.db(dbName);
     const collection = db.collection<user>('user');
-    const login = await collection.findOne({
+    const result = await collection.findOne({
       studentId: userData.studentId,
       password: userData.password,
     });
-    if (login) {
+    if (result) {
       console.log('登入成功');
       return {
         success: true,
