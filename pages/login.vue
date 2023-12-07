@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { loginformState } from '~/composables/api/user';
+import { userLogin } from '~/composables/api/user';
 definePageMeta({
     layout: false,
 })
@@ -9,10 +10,16 @@ const userData = ref<loginformState>({
     studentId: '',
     password: '',
 });
-const onFinish = (Info: any) => {
-    //這邊嗎
-    message.success('登入成功');
-    console.log('Success:', Info);
+const onFinish = async (Info: any) => {
+        const result = await userLogin(Info);
+    if (result) {
+        message.success('登入成功');
+        console.log('Success:', Info);
+    } else {
+        message.error('登入失敗');
+        console.log('Failed:', Info);
+    }
+    
 };
 
 const onFinishFailed = (errorInfo: any) => {

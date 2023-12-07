@@ -9,16 +9,15 @@ export interface loginformState {
   password: string;
 }
 
+export const userRegister = async (userData: registerFormState) => {};
 
-
-export const userRegister = async (userData:registerFormState) => {
-
+export const userLogin = async (userData: loginformState) => {
+  console.log('userData前端', userData);
+  const { data } = await useFetch('/api/user/login', {
+    method: 'POST',
+    body: userData,
+  });
+  return data.value?.success;
 };
 
-export const userLogin = async (userData:loginformState) => {
-  
-};
-
-export const userLogout = async (studentId: string) => {
-  
-};
+export const userLogout = async (studentId: string) => {};

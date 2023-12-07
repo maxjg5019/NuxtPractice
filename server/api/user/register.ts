@@ -6,7 +6,7 @@ const client = new MongoClient(config.MONGODB_URI);
 const dbName = 'dbFinal';
 
 export default defineEventHandler(async (event) => {
-  const { userData } = await readBody(event);
+  const userData = await readBody(event);
   try {
     const db = client.db(dbName);
     const collection = db.collection<user>('user');
@@ -16,7 +16,13 @@ export default defineEventHandler(async (event) => {
       password: userData.password,
     });
     console.log('資料插入成功');
+    return{
+
+    };
   } catch (err) {
     console.log('資料插入失敗', err);
+    return{
+
+    };
   }
 });
