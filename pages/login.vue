@@ -15,6 +15,7 @@ const onFinish = async (Info: any) => {
     if (result?.success) {
         message.success(result.message);
         console.log('Success:', Info);
+        navigateTo('/');
     } else {
         message.error(result?.message);
         console.log('Failed:', Info);

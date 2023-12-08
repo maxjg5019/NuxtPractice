@@ -8,7 +8,7 @@ const selectedKeys = ref<string[]>(['2']);
         <a-layout-header>
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-                <a-menu-item key="1">登入</a-menu-item>
+                <a-menu-item key="1">帳號登出</a-menu-item>
                 <a-menu-item key="2">課程表格</a-menu-item>
                 <a-menu-item key="3">修改課表</a-menu-item>
             </a-menu>
