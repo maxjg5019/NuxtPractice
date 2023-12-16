@@ -1,6 +1,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useLoginStore } from '@/store/auth';
+const loginStore = useLoginStore();
 const selectedKeys = ref<string[]>(['2']);
+
+const userLogout = async () => {
+  loginStore.Logout();
+  navigateTo('/login');
+};
+
 </script>
 
 <template>
@@ -8,7 +16,7 @@ const selectedKeys = ref<string[]>(['2']);
         <a-layout-header>
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-                <a-menu-item key="1">帳號登出</a-menu-item>
+                <a-menu-item key="1" @click="userLogout">帳號登出</a-menu-item>
                 <a-menu-item key="2">課程總表</a-menu-item>
                 <a-menu-item key="3">修改課表</a-menu-item>
                 <a-menu-item key="4">成員列表</a-menu-item>

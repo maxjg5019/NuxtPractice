@@ -18,18 +18,14 @@ const onFinish = async (Info: any) => {
     if (result?.success) {
         message.success(result.message);
         loginStore.Login();
-        console.log('Success:', Info);
         navigateTo('/');
     } else {
         message.error(result?.message);
-        console.log('Failed:', Info);
     }
-
 };
 
 const onFinishFailed = (errorInfo: any) => {
     message.error('請輸入完整資料');
-    console.log('Failed:', errorInfo);
 };
 
 </script>

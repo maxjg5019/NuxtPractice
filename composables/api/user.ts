@@ -1,3 +1,6 @@
+// import { useLoginStore } from '@/store/auth';
+
+// const loginStore = useLoginStore();
 export interface registerFormState {
   name: string;
   studentId: string;
@@ -27,6 +30,6 @@ export const userLogin = async (loginData: loginformState) => {
   return data.value;
 };
 
-export const userLogout = async (studentId: string) => {
-  
+export const userLogout = async () => {
+  //loginStore.Logout(); 鳳梨不能在這邊呼叫
 };

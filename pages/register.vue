@@ -16,17 +16,14 @@ const onFinish = async (Info: any) => {
     const result = await userRegister(Info);
     if(result?.success){
         message.success(result.message);
-        console.log('Success:', Info);
         navigateTo('/login');
     }else{
         message.error(result?.message);
-        console.log('Failed:', Info);
     }
 };
 
 const onFinishFailed = (errorInfo: any) => {
     message.error('請輸入完整資料');
-    console.log('Failed:', errorInfo);
 };
 
 </script>
