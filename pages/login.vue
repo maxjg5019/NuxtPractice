@@ -1,19 +1,23 @@
 <script lang="ts" setup>
 import type { loginformState } from '~/composables/api/user';
 import { userLogin } from '~/composables/api/user';
+import { useLoginStore } from '@/store/auth';
 definePageMeta({
     layout: false,
 })
-
 
 const userData = ref<loginformState>({
     studentId: '',
     password: '',
 });
+
+const loginStore = useLoginStore();
+
 const onFinish = async (Info: any) => {
     const result = await userLogin(Info);
     if (result?.success) {
         message.success(result.message);
+        loginStore.Login();
         console.log('Success:', Info);
         navigateTo('/');
     } else {

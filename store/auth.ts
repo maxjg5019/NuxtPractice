@@ -1,23 +1,21 @@
 import { defineStore } from 'pinia';
 
-interface UserState {
-  isAuthenticated: boolean;
-  data: any; // 您可以替換為更具體的用戶數據類型
-}
-
-export const useUserStore = defineStore('user', {
-  state: (): UserState => ({
-    isAuthenticated: false,
-    data: null,
-  }),
+export const useLoginStore = defineStore('user', {
+  state: () => {
+    return {
+      isLoggedIn: useCookie('isLoggedIn').value || false,
+    };
+  },
   actions: {
-    userLogin(){
-      
+    Login() {
+      const cookie = useCookie('isLoggedIn',{maxAge: 600});
+      cookie.value = true.toString();
+      this.isLoggedIn = true;
     },
-    userLogout(){
-      
+    Logout() {
+      const cookie = useCookie('isLoggedIn');
+      cookie.value = false.toString();
+      this.isLoggedIn = false;
     },
   },
 });
-
-export const useAuthStore = defineStore('auth', {});
