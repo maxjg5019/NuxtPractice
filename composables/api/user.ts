@@ -27,4 +27,6 @@ export const userLogin = async (loginData: loginformState) => {
   return data.value;
 };
 
-export const userLogout = async (studentId: string) => {};
+export const userLogout = async (studentId: string) => {
+  
+};

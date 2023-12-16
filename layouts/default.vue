@@ -9,9 +9,10 @@ const selectedKeys = ref<string[]>(['2']);
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
                 <a-menu-item key="1">帳號登出</a-menu-item>
-                <a-menu-item key="2">課程表格</a-menu-item>
+                <a-menu-item key="2">課程總表</a-menu-item>
                 <a-menu-item key="3">修改課表</a-menu-item>
-            </a-menu>
+                <a-menu-item key="4">成員列表</a-menu-item>
+            </a-menu> 
         </a-layout-header>
         <a-layout-content style="padding: 0 50px">
             <div :style="{ background: '#fff', padding: '24px', minHeight: '280px', marginTop: '16px' }">
