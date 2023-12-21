@@ -8,7 +8,7 @@ export const useLoginStore = defineStore('user', {
   },
   actions: {
     Login() {
-      const cookie = useCookie('isLoggedIn',{maxAge: 600});
+      const cookie = useCookie('isLoggedIn'); //,{maxAge: 600}
       cookie.value = true.toString();
       this.isLoggedIn = true;
     },
