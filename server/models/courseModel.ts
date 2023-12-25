@@ -1,25 +1,45 @@
-
+/**
+ * @description: 課程 DB 資料格式
+ * @param name - 課程名稱
+ * @param teacher - 授課教師
+ * @param weekDay - 星期
+ * @param period - 節次
+ * @param credit - 學分
+ * @param semester - 上學期: 0, 下學期: 1
+ */
 export interface course{
-    //id: ObjectId;
-    name: string; //課程名稱 主鍵
-    teacher: string; //授課教師
-    weekDay: number; //星期
-    period: number; //節次
-    credit: number; //學分
-    semester: number; //上學期: 0, 下學期: 1
+    name: string;
+    teacher: string;
+    weekDay: number;
+    period: number;
+    credit: number;
+    semester: number;
 }
+/**
+ * @description: 學生修課 DB 資料格式
+ * @param courseList - 學生修的每一堂 課程資料
+ * @param studentId - 學號
+ */
 export interface studentCourse {
-    courseList: courseTableInfoDB[] ; //學生修的每一堂 課程資料
-    studentId: string; //學號 外鍵
+    courseList: courseTableInfoDB[] ;
+    studentId: string;
   }
-  
+  /**
+ * @description: 學生修的每一堂 課程資料
+ * @param courseName - 課程名稱
+ * @param courseDate - 課程時間
+ */
   interface courseTableInfoDB {
-    courseName: string; //課程名稱 外鍵
+    courseName: string;
     courseDate: courseDate[];
   }
-  
+    /**
+ * @description: 課程時間
+ * @param weekDay - 星期
+ * @param period - 節次
+ */
   interface courseDate {
-    weekDay: number; //星期
-    period: number; //節次
+    weekDay: number;
+    period: number;
   }
   

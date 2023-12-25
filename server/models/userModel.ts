@@ -1,5 +1,11 @@
+/**
+ * @description: 學生DB資料格式
+ * @param name - 姓名
+ * @param studentId - 學號
+ * @param password - 密碼
+ */
 export interface user{
-  name: string; //姓名
-  studentId: string; //學號 主鍵
-  password: string; //密碼
+  name: string;
+  studentId: string;
+  password: string;
 }
