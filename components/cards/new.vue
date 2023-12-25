@@ -1,21 +1,21 @@
 <script lang="tsx" setup>
 //我也不熟 jsx 跟 tsx ，反正就是讓 script 可以塞 HTML 的酷東西
 
-interface ClassInfo {
+interface courseInfo {
     key: string;
-    className: string;
-    classDate: ClassDate[];
+    courseName: string;
+    courseDate: courseDate[];
 }
 
-interface ClassDate {
+interface courseDate {
     weekDay: number;
-    classPeriod: number;
+    period: number;
 }
 
-function renderClassItems(classItems: string[]) {
+function renderCourseItems(courseItems: string[]) {
     return (
         <div>
-            {classItems.map((item) => {
+            {courseItems.map((item) => {
                 return <div>{item}</div>;
             })}
         </div>
@@ -26,45 +26,45 @@ function renderClassItems(classItems: string[]) {
 const columns = [
     {
         title: '',
-        className: 'classPeriod',
-        dataIndex: 'classPeriod',
+        className: 'period',
+        dataIndex: 'period',
         width: 50,
     },
     {
         title: '星期一',
         className: 'week',
         dataIndex: 'monday',
-        customRender: ({ text }: { text: string[] }) => renderClassItems(text)
+        customRender: ({ text }: { text: string[] }) => renderCourseItems(text)
     },
     {
         title: '星期二',
         className: 'week',
         dataIndex: 'tuesday',
-        customRender: ({ text }: { text: string[] }) => renderClassItems(text)
+        customRender: ({ text }: { text: string[] }) => renderCourseItems(text)
     },
     {
         title: '星期三',
         className: 'week',
         dataIndex: 'wednesday',
-        customRender: ({ text }: { text: string[] }) => renderClassItems(text)
+        customRender: ({ text }: { text: string[] }) => renderCourseItems(text)
     },
     {
         title: '星期四',
         className: 'week',
         dataIndex: 'thursday',
-        customRender: ({ text }: { text: string[] }) => renderClassItems(text)
+        customRender: ({ text }: { text: string[] }) => renderCourseItems(text)
     },
     {
         title: '星期五',
         className: 'week',
         dataIndex: 'friday',
-        customRender: ({ text }: { text: string[] }) => renderClassItems(text)
+        customRender: ({ text }: { text: string[] }) => renderCourseItems(text)
     },
 ];
 
 interface tableData {
     key: string;
-    classPeriod: string;
+    period: string;
     monday: string[];
     tuesday: string[];
     wednesday: string[];
@@ -72,169 +72,168 @@ interface tableData {
     friday: string[];
 }
 
-const newDate = ref<tableData[]>([]);
-
 //模擬從DB取得的資料
-const newColmns: ClassInfo[] = [
+const newColmns: courseInfo[] = [
     {
         key: '1',
-        className: '課程 A',
-        classDate: [
+        courseName: '課程 A',
+        courseDate: [
             {
                 weekDay: 1,
-                classPeriod: 1,
+                period: 1,
             },
             {
                 weekDay: 1,
-                classPeriod: 2,
+                period: 2,
             },
             {
                 weekDay: 1,
-                classPeriod: 3,
+                period: 3,
             },
         ],
     },
     {
         key: '2',
-        className: '課程 B',
-        classDate: [
+        courseName: '課程 B',
+        courseDate: [
             {
                 weekDay: 4,
-                classPeriod: 2,
+                period: 2,
             },
         ],
     },
     {
         key: '3',
-        className: '課程 C',
-        classDate: [
+        courseName: '課程 C',
+        courseDate: [
             {
                 weekDay: 2,
-                classPeriod: 3,
+                period: 3,
             },
         ],
     },
     {
         key: '4',
-        className: '課程 D',
-        classDate: [
+        courseName: '課程 D',
+        courseDate: [
             {
                 weekDay: 1,
-                classPeriod: 4,
+                period: 4,
             },
         ],
     },
     {
         key: '5',
-        className: '課程 E',
-        classDate: [
+        courseName: '課程 E',
+        courseDate: [
             {
                 weekDay: 3,
-                classPeriod: 5,
+                period: 5,
             },
         ],
     },
     {
         key: '6',
-        className: '課程 F',
-        classDate: [
+        courseName: '課程 F',
+        courseDate: [
             {
                 weekDay: 5,
-                classPeriod: 6,
+                period: 6,
             },
         ],
     },
     {
         key: '7',
-        className: '課程 G',
-        classDate: [
+        courseName: '課程 G',
+        courseDate: [
             {
                 weekDay: 4,
-                classPeriod: 7,
+                period: 7,
             },
         ],
     },
     {
         key: '8',
-        className: '課程 H',
-        classDate: [
+        courseName: '課程 H',
+        courseDate: [
             {
                 weekDay: 2,
-                classPeriod: 8,
+                period: 8,
             },
         ],
     },
     {
         key: '9',
-        className: '課程 I',
-        classDate: [
+        courseName: '課程 I',
+        courseDate: [
             {
                 weekDay: 1,
-                classPeriod: 9,
+                period: 9,
             },
         ],
     },
     {
         key: '10',
-        className: '課程 J',
-        classDate: [
+        courseName: '課程 J',
+        courseDate: [
             {
                 weekDay: 3,
-                classPeriod: 10,
+                period: 10,
             },
         ],
     },
     {
         key: '11',
-        className: '課程 A1',
-        classDate: [
+        courseName: '課程 A1',
+        courseDate: [
             {
                 weekDay: 1,
-                classPeriod: 1,
+                period: 1,
             },
             {
                 weekDay: 1,
-                classPeriod: 2,
+                period: 2,
             },
             {
                 weekDay: 1,
-                classPeriod: 3,
+                period: 3,
             },
         ],
     },
     {
         key: '12',
-        className: '課程 DTV',
-        classDate: [
+        courseName: '課程 DTV',
+        courseDate: [
             {
                 weekDay: 5,
-                classPeriod: 12,
+                period: 12,
             },
             {
                 weekDay: 5,
-                classPeriod: 13,
+                period: 13,
             },
             {
                 weekDay: 5,
-                classPeriod: 14,
+                period: 14,
             },
         ],
     },
 ];
 
-ClassInfoToTableData(newColmns);
+const finalData = ref<tableData[]>([]);
+courseInfoToTableData(newColmns);
 
-function ClassInfoToTableData(classIndos: ClassInfo[]): void {
+function courseInfoToTableData(courseIndos: courseInfo[]): void {
     const tableData: tableData[] = [];
 
     // 資料型態的節次        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'];
-    const NTUTClassPeriod = ['1', '2', '3', '4', 'N', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D'];
+    const NTUTcoursePeriod = ['1', '2', '3', '4', 'N', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D'];
 
     //初始化每周的節次表
-    for (let i = 0; i < NTUTClassPeriod.length; i++) {
+    for (let i = 0; i < NTUTcoursePeriod.length; i++) {
         tableData.push({
             key: i.toString(),
-            classPeriod: (i + 1).toString(),
+            period: (i + 1).toString(),
             monday: [],
             tuesday: [],
             wednesday: [],
@@ -245,40 +244,40 @@ function ClassInfoToTableData(classIndos: ClassInfo[]): void {
     console.log("初始化", tableData);
 
     //分別將課程資料填入對應的節次表
-    classIndos.forEach((eachClass) => {
-        eachClass.classDate.forEach((eachclassDate) => {
-            switch (eachclassDate.weekDay) {
+    courseIndos.forEach((eachCourse) => {
+        eachCourse.courseDate.forEach((eachCourseDate) => {
+            switch (eachCourseDate.weekDay) {
                 case 1:
-                    tableData[eachclassDate.classPeriod - 1].monday.push(eachClass.className);
+                    tableData[eachCourseDate.period - 1].monday.push(eachCourse.courseName);
                     break;
                 case 2:
-                    tableData[eachclassDate.classPeriod - 1].tuesday.push(eachClass.className);
+                    tableData[eachCourseDate.period - 1].tuesday.push(eachCourse.courseName);
                     break;
                 case 3:
-                    tableData[eachclassDate.classPeriod - 1].wednesday.push(eachClass.className);
+                    tableData[eachCourseDate.period - 1].wednesday.push(eachCourse.courseName);
                     break;
                 case 4:
-                    tableData[eachclassDate.classPeriod - 1].thursday.push(eachClass.className);
+                    tableData[eachCourseDate.period - 1].thursday.push(eachCourse.courseName);
                     break;
                 case 5:
-                    tableData[eachclassDate.classPeriod - 1].friday.push(eachClass.className);
+                    tableData[eachCourseDate.period - 1].friday.push(eachCourse.courseName);
                     break;
             }
         });
     });
     //最後再把節次轉換成北科正確的格式
     tableData.forEach((item, index) => {
-        item.classPeriod = NTUTClassPeriod[index];
+        item.period = NTUTcoursePeriod[index];
     });
     console.log("處理完畢", tableData);
-    newDate.value = tableData;
+    finalData.value = tableData;
 }
 
 </script>
 
 <template>
-    <a-spin :spinning="newDate == null">
-        <a-table :columns="columns" :data-source="newDate" bordered :pagination="false"></a-table>
+    <a-spin :spinning="finalData == null">
+        <a-table :columns="columns" :data-source="finalData" bordered :pagination="false"></a-table>
     </a-spin>
 </template>
  
