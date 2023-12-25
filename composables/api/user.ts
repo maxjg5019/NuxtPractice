@@ -31,5 +31,5 @@ export const userLogin = async (loginData: loginformState) => {
 };
 
 export const userLogout = async () => {
-  //loginStore.Logout(); 鳳梨不能在這邊呼叫
+  //loginStore.Logout(); 鳳梨不能在這邊呼叫 所以直接實作在 layouts/deafult.vue
 };
