@@ -3,8 +3,6 @@
 </script>
 
 <template>
-  <!-- <CardsClassTable />
-  <a-divider /> -->
   <CardsNew />
 </template>
 

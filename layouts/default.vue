@@ -2,11 +2,11 @@
 import { ref } from 'vue';
 import { useLoginStore } from '@/store/auth';
 const loginStore = useLoginStore();
-const selectedKeys = ref<string[]>(['2']);
+const selectedKeys = ref<string[]>(['1']);
 
 const userLogout = async () => {
-  loginStore.Logout();
-  navigateTo('/login');
+    loginStore.Logout();
+    navigateTo('/login');
 };
 
 </script>
@@ -16,11 +16,20 @@ const userLogout = async () => {
         <a-layout-header>
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-                <a-menu-item key="1" @click="userLogout">帳號登出</a-menu-item>
-                <a-menu-item key="2">課程總表</a-menu-item>
-                <a-menu-item key="3">修改課表</a-menu-item>
-                <a-menu-item key="4">修改課程</a-menu-item>
-            </a-menu> 
+                <a-menu-item key="1">
+                    <nuxt-link to="/">課程總表</nuxt-link>
+                </a-menu-item>
+                <a-menu-item key="2">
+                    <nuxt-link to="/updateTable">修改課表</nuxt-link>
+                </a-menu-item>
+                <a-menu-item key="3">
+                    <nuxt-link to="/updateCourse">修改課程</nuxt-link>
+                </a-menu-item>
+                <a-menu-item key="4">
+                    <nuxt-link to="/about">關於</nuxt-link>
+                </a-menu-item>
+                <a-menu-item key="5" @click="userLogout">帳號登出</a-menu-item>
+            </a-menu>
         </a-layout-header>
         <a-layout-content style="padding: 0 50px">
             <div :style="{ background: '#fff', padding: '24px', minHeight: '280px', marginTop: '16px' }">
