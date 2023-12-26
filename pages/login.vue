@@ -17,7 +17,7 @@ const onFinish = async (Info: any) => {
     const result = await userLogin(Info);
     if (result?.success) {
         message.success(result.message);
-        loginStore.Login();
+        loginStore.Login(Info.studentId);
         navigateTo('/');
     } else {
         message.error(result?.message);
