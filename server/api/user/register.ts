@@ -6,7 +6,7 @@ const client = new MongoClient(config.MONGODB_URI);
 const dbName = 'dbFinal';
 
 export default defineEventHandler(async (event) => {
-  const userData = await readBody(event);
+  const userData:user = await readBody(event);
   try {
     const db = client.db(dbName);
     const collection = db.collection<user>('user');

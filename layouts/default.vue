@@ -19,7 +19,7 @@ const userLogout = async () => {
                 <a-menu-item key="1" @click="userLogout">帳號登出</a-menu-item>
                 <a-menu-item key="2">課程總表</a-menu-item>
                 <a-menu-item key="3">修改課表</a-menu-item>
-                <a-menu-item key="4">成員列表</a-menu-item>
+                <a-menu-item key="4">修改課程</a-menu-item>
             </a-menu> 
         </a-layout-header>
         <a-layout-content style="padding: 0 50px">
