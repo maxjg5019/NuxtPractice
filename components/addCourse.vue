@@ -52,16 +52,18 @@ const showModal = () => {
     modalTitle.value = '新增課程';
 };
 
+const formRef = ref(); // Form 實例的參考
 const handleOk = async () => {
+    formRef.value.validate().then(async () => {
+        const checkDuplicate = courseForm.courseDate.some((courrseDate, index, array) => {
+            return array.findIndex(cd => cd.weekDay === courrseDate.weekDay && cd.period === courrseDate.period) !== index;
+        });
 
-    const checkDuplicate = courseForm.courseDate.some((courrseDate, index, array) => {
-        return array.findIndex(cd => cd.weekDay === courrseDate.weekDay && cd.period === courrseDate.period) !== index;
-    });
+        if (checkDuplicate) {
+            message.error('課程時間重複');
+            return;
+        }
 
-    if (checkDuplicate) {
-        message.error('課程時間重複');
-        return;
-    } else {
         console.log('handleOk', courseForm);
         const result = await addCourse(courseForm);
         if (result?.success) {
@@ -69,8 +71,12 @@ const handleOk = async () => {
         } else {
             message.error(result?.message);
         }
-    }
-    isModalVisible.value = false;
+        
+        isModalVisible.value = false;
+    }).catch(() => {
+        message.error('表單驗證失敗');
+    });
+
 };
 
 const handleCancel = () => { isModalVisible.value = false; };
@@ -81,32 +87,34 @@ const handleCancel = () => { isModalVisible.value = false; };
     <a-button type="primary" @click="showModal">新增課程</a-button>
 
     <a-modal v-model:open="isModalVisible" :title="modalTitle" @ok="handleOk" @cancel="handleCancel">
-        <a-row :gutter="16">
-            <a-col :span="12">
-                <a-form-item label="課程名稱">
-                    <a-input v-model:value="courseForm.name" />
-                </a-form-item>
-            </a-col>
-            <a-col :span="12">
-                <a-form-item label="授課教師">
-                    <a-input v-model:value="courseForm.teacher" />
-                </a-form-item>
-            </a-col>
-        </a-row>
-        <a-button style="margin-bottom: 16px;" type="primary" @click="addCourseDate">新增課程時間</a-button>
+        <a-form ref="formRef" :model="courseForm">
+            <a-row :gutter="16">
+                <a-col :span="12">
+                    <a-form-item label="課程名稱">
+                        <a-input v-model:value="courseForm.name" />
+                    </a-form-item>
+                </a-col>
+                <a-col :span="12">
+                    <a-form-item label="授課教師">
+                        <a-input v-model:value="courseForm.teacher" />
+                    </a-form-item>
+                </a-col>
+            </a-row>
+            <a-button style="margin-bottom: 16px;" type="primary" @click="addCourseDate">新增課程時間</a-button>
 
-        <a-form-item v-for="course in courseForm.courseDate" label="課程時間">
-            <a-select v-model:value="course.weekDay">
-                <a-select-option v-for="day in weekDays" :value="day.value" :key="day.label">
-                    {{ day.label }}
-                </a-select-option>
-            </a-select>
-            <a-select v-model:value="course.period">
-                <a-select-option v-for="period in coursePeriods" :value="period.value" :key="period.label">
-                    {{ period.label }}
-                </a-select-option>
-            </a-select>
-        </a-form-item>
+            <a-form-item v-for="course in courseForm.courseDate" label="課程時間">
+                <a-select v-model:value="course.weekDay">
+                    <a-select-option v-for="day in weekDays" :value="day.value" :key="day.label">
+                        {{ day.label }}
+                    </a-select-option>
+                </a-select>
+                <a-select v-model:value="course.period">
+                    <a-select-option v-for="period in coursePeriods" :value="period.value" :key="period.label">
+                        {{ period.label }}
+                    </a-select-option>
+                </a-select>
+            </a-form-item>
+        </a-form>
     </a-modal>
 </template>
   

@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from 'mongodb';
+import { MongoClient } from 'mongodb';
 import type { user } from '~/server/models/userModel';
 
 const config = useRuntimeConfig();
@@ -16,21 +16,21 @@ export default defineEventHandler(async (event) => {
     });
     if (userExist) {
       return { success: false, message: '此帳號已存在' };
+    }
+
+    const result = await collection.insertOne({
+      name: userData.name,
+      studentId: userData.studentId,
+      password: userData.password,
+      courseList: [],
+    });
+
+    console.log('result', result);
+
+    if (result.acknowledged) {
+      return { success: true, message: '註冊成功' };
     } else {
-      const result = await collection.insertOne({
-        name: userData.name,
-        studentId: userData.studentId,
-        password: userData.password,
-        courseList: [],
-      });
-
-      console.log('result', result);
-
-      if (result.acknowledged) {
-        return { success: true, message: '註冊成功' };
-      } else {
-        return { success: false, message: '註冊失敗' };
-      }
+      return { success: false, message: '註冊失敗' };
     }
   } catch (err) {
     return { success: false, message: 'DB連線失敗' };
