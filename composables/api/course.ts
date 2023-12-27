@@ -29,6 +29,22 @@ export const deleteCourse = async (courseInfo: course) => {
   return data.value;
 };
 
+export const getAllCourse = async () => {
+  const { data } = await useFetch('/api/course/getStudentCourse', {
+    method: 'POST',
+  });
+  return data.value;
+};
+
+export const getStudentCourse = async (studentID: string) => {
+  console.log('學號', studentID);
+  const { data } = await useFetch('/api/course/getStudentCourse', {
+    method: 'POST',
+    body: studentID,
+  });
+  return data.value;
+};
+
 export const getCourseTableData = async (studentID: string) => {
   console.log('getCourseTableData 前端傳學號做查詢', studentID);
   const { data } = await useFetch('/api/course/getAllStudentCourse', {

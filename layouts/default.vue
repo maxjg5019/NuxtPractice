@@ -27,7 +27,7 @@ const userLogout = async () => {
                 </a-menu-item>
                 <a-menu-item key="3">
                     <!-- TODO:只有Admin端可操作 -->
-                    <nuxt-link to="/updateCourse">修改課程</nuxt-link>
+                    <nuxt-link to="/courseList">課程列表</nuxt-link>
                 </a-menu-item>
                 <a-menu-item key="4">
                     <nuxt-link to="/about">關於</nuxt-link>

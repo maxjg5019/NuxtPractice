@@ -2,7 +2,7 @@
  * @description: 課程 DB 資料格式
  * @param name - 課程名稱
  * @param teacher - 授課教師
- * @param courseDate - 課程時間
+ * @param courseDate - 課程時間[]
  */
 export interface course {
   name: string;
