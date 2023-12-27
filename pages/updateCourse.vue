@@ -5,7 +5,7 @@
 
 <template>
     <a-row style="margin-bottom: 20px;">
-        <UpdateCourse />
+        <AddCourse />
     </a-row>
     <a-row style="margin-bottom: 20px;">
         <!-- 表格 -->
