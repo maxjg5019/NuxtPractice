@@ -53,12 +53,22 @@ const showModal = () => {
 };
 
 const handleOk = async () => {
-    console.log('handleOk', courseForm);
-    const result = await addCourse(courseForm);
-    if (result?.success) {
-        message.success(result.message);
+
+    const checkDuplicate = courseForm.courseDate.some((courrseDate, index, array) => {
+        return array.findIndex(cd => cd.weekDay === courrseDate.weekDay && cd.period === courrseDate.period) !== index;
+    });
+
+    if (checkDuplicate) {
+        message.error('課程時間重複');
+        return;
     } else {
-        message.error(result?.message);
+        console.log('handleOk', courseForm);
+        const result = await addCourse(courseForm);
+        if (result?.success) {
+            message.success(result.message);
+        } else {
+            message.error(result?.message);
+        }
     }
     isModalVisible.value = false;
 };
@@ -83,7 +93,7 @@ const handleCancel = () => { isModalVisible.value = false; };
                 </a-form-item>
             </a-col>
         </a-row>
-        <a-button style= "margin-bottom: 16px;" type="primary" @click="addCourseDate">新增課程時間</a-button>
+        <a-button style="margin-bottom: 16px;" type="primary" @click="addCourseDate">新增課程時間</a-button>
 
         <a-form-item v-for="course in courseForm.courseDate" label="課程時間">
             <a-select v-model:value="course.weekDay">
@@ -100,7 +110,5 @@ const handleCancel = () => { isModalVisible.value = false; };
     </a-modal>
 </template>
   
-<style scoped>
-
-</style>
+<style scoped></style>
   
