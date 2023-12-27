@@ -11,6 +11,12 @@ export interface courseDate {
   coursePeriod: number;
 }
 
+export interface getAllCourseReponse {
+  success: boolean;
+  data: courseTableInfo[];
+  message: string;
+}
+
 export const addCourse = async (courseInfo: course) => {
   console.log('getCourseTableData 新增課程的request', courseInfo);
   const { data } = await useFetch('/api/course/addCourse', {
@@ -29,11 +35,11 @@ export const deleteCourse = async (courseInfo: course) => {
   return data.value;
 };
 
-export const getAllCourse = async () => {
+export const getAllCourse = async ():Promise<getAllCourseReponse> => {
   const { data } = await useFetch('/api/course/getAllCourse', {
     method: 'POST',
   });
-  return data.value;
+  return data.value as getAllCourseReponse;
 };
 
 export const getStudentCourse = async (studentID: string) => {
