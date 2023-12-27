@@ -30,7 +30,7 @@ export const deleteCourse = async (courseInfo: course) => {
 };
 
 export const getAllCourse = async () => {
-  const { data } = await useFetch('/api/course/getStudentCourse', {
+  const { data } = await useFetch('/api/course/getAllCourse', {
     method: 'POST',
   });
   return data.value;

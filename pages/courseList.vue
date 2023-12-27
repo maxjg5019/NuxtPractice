@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import type { course } from '~/server/models/courseModel';
 import { DeleteOutlined } from '@ant-design/icons-vue';
-import {getStudentCourse} from '~/composables/api/course';
-import{useLoginStore} from '~/store/auth';
+import {getAllCourse} from '~/composables/api/course';
 
 const columns = [
     {
@@ -22,9 +21,8 @@ const columns = [
         key: 'courseTime',
     },
 ];
-const loginStore = useLoginStore();
-const studentCourseData = await getStudentCourse(loginStore.studentID!);
-console.log('studentCourseData', studentCourseData);
+const allCourseData = await getAllCourse();
+console.log('allCourseData', allCourseData);
 
 interface tableData {
     key: string;
