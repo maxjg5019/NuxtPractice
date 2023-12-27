@@ -17,16 +17,15 @@ export default defineEventHandler(async (event) => {
     });
     if (courseExist) {
       return { success: false, message: '此課程已存在' };
-    }
-
-    const result = await collection.insertOne(courseData);
-
-    console.log('result', result);
-
-    if (result.acknowledged) {
-      return { success: true, message: '新增成功' };
     } else {
-      return { success: false, message: '新增失敗' };
+      const result = await collection.insertOne(courseData);
+
+      console.log('result', result);
+      if (result.acknowledged) {
+        return { success: true, message: '新增成功' };
+      } else {
+        return { success: false, message: '新增失敗' };
+      }
     }
   } catch (err) {
     return { success: false, message: 'DB連線失敗' };
