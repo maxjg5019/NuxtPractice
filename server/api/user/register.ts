@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import type { user } from '~/server/models/userModel';
 
 const config = useRuntimeConfig();
@@ -22,6 +22,7 @@ export default defineEventHandler(async (event) => {
       name: userData.name,
       studentId: userData.studentId,
       password: userData.password,
+      courseList: [],
     });
 
     console.log('result', result);

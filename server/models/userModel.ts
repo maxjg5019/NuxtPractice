@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 /**
  * @description: 學生 DB 資料格式
  * @param name - 姓名
@@ -8,4 +10,5 @@ export interface user{
   name: string;
   studentId: string;
   password: string;
+  courseList: ObjectId[];
 }
