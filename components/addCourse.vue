@@ -32,7 +32,7 @@ const coursePeriods = [
     { label: '第四節', value: 4 },
     { label: '第N節', value: 5 },
     { label: '第五節', value: 6 },
-    { label: '第八節', value: 7 },
+    { label: '第六節', value: 7 },
     { label: '第七節', value: 8 },
     { label: '第八節', value: 9 },
     { label: '第九節', value: 10 },
