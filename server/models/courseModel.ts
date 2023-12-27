@@ -4,16 +4,11 @@
  * @param teacher - 授課教師
  * @param weekDay - 星期
  * @param period - 節次
- * @param credit - 學分
- * @param semester - 上學期: 0, 下學期: 1
  */
 export interface course{
     name: string;
     teacher: string;
-    weekDay: number;
-    period: number;
-    credit: number;
-    semester: number;
+    courseDate: courseDate[]
 }
 /**
  * @description: 學生修課 DB 資料格式

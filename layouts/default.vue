@@ -17,12 +17,16 @@ const userLogout = async () => {
             <div class="logo" />
             <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
                 <a-menu-item key="1">
+                    <!-- TODO:Admin端會顯示所有學生加起來的課表
+                        可以檢視特定學生的課表-->
                     <nuxt-link to="/">課程總表</nuxt-link>
                 </a-menu-item>
                 <a-menu-item key="2">
-                    <nuxt-link to="/updateTable">修改課表</nuxt-link>
+                    <!-- TODO:只有學生端可操作 -->
+                    <nuxt-link to="/updateTable">修改個人課表</nuxt-link>
                 </a-menu-item>
                 <a-menu-item key="3">
+                    <!-- TODO:只有Admin端可操作 -->
                     <nuxt-link to="/updateCourse">修改課程</nuxt-link>
                 </a-menu-item>
                 <a-menu-item key="4">
