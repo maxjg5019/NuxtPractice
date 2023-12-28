@@ -13,14 +13,12 @@ export default defineEventHandler(async () => {
 
     const getCourseData = await courseCollection.find().toArray();
     if (getCourseData == null) {
-      console.log('所有課程搜尋失敗');
       return {
         success: false,
         data: getCourseData,
         message: '所有課程搜尋失敗',
       };
     } else {
-      console.log('所有課程搜尋成功', getCourseData);
       return {
         success: true,
         data: getCourseData,
