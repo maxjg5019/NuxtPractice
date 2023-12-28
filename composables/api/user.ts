@@ -14,20 +14,20 @@ export interface loginformState {
 
 export const userRegister = async (registerData: registerFormState) => {
   console.log('registerData前端', registerData);
-  const { data } = await useFetch('/api/user/register', {
+  const data = await $fetch('/api/user/register', {
     method: 'POST',
     body: registerData,
   });
-  return data.value;
+  return data;
 };
 
 export const userLogin = async (loginData: loginformState) => {
   console.log('loginData前端', loginData);
-  const { data } = await useFetch('/api/user/login', {
+  const data = await $fetch('/api/user/login', {
     method: 'POST',
     body: loginData,
   });
-  return data.value;
+  return data;
 };
 
 export const userLogout = async () => {

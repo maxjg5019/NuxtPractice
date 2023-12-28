@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { course } from '~/server/models/courseModel';
 import { DeleteOutlined } from '@ant-design/icons-vue';
-import {getAllCourse} from '~/composables/api/course';
+import { getAllCourse } from '~/composables/api/course';
 
 const columns = [
     {

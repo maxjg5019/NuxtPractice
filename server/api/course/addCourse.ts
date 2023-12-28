@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     if (courseExist) {
       return { success: false, message: '此課程已存在' };
     }
-    
+
     const result = await collection.insertOne(courseData);
 
     console.log('result', result);
