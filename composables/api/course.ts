@@ -1,14 +1,15 @@
 import type { course } from '~/server/models/courseModel';
-
 export interface courseTableInfo {
   key: string; //這個從DB取出資料後再加上去
-  courseName: string;
+  _id: string;
+  name: string;
+  teacher: string;
   courseDate: courseDate[];
 }
 
 export interface courseDate {
   weekDay: number;
-  coursePeriod: number;
+  period: number;
 }
 
 export interface getAllCourseReponse {
@@ -26,11 +27,11 @@ export const addCourse = async (courseInfo: course) => {
   return data;
 };
 
-export const deleteCourse = async (courseInfo: course) => {
-  console.log('getCourseTableData 刪除課程的request', courseInfo);
+export const deleteCourse = async (courseId: string) => {
+  console.log('getCourseTableData 刪除課程的request', courseId);
   const data = await $fetch('/api/course/deleteCourse', {
     method: 'POST',
-    body: courseInfo,
+    body: { courseId },
   });
   return data;
 };
