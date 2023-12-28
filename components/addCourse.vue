@@ -67,6 +67,7 @@ const handleOk = async () => {
     const result = await addCourse(courseForm);
     if (result?.success) {
         message.success(result.message);
+        reloadNuxtApp();
     } else {
         message.error(result?.message);
     }
