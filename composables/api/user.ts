@@ -12,6 +12,17 @@ export interface loginformState {
   password: string;
 }
 
+export interface getAllStudentReponse {
+  success: boolean;
+  data: studentList[];
+  message: string;
+}
+
+export interface studentList {
+  name: string;
+  studentId: string;
+}
+
 export const userRegister = async (registerData: registerFormState) => {
   console.log('registerData前端', registerData);
   const data = await $fetch('/api/user/register', {
@@ -28,6 +39,13 @@ export const userLogin = async (loginData: loginformState) => {
     body: loginData,
   });
   return data;
+};
+
+export const getAllStudents = async (): Promise<getAllStudentReponse> => {
+  const data = await $fetch('/api/user/getAllStudents', {
+    method: 'POST',
+  });
+  return data as getAllStudentReponse;
 };
 
 export const userLogout = async () => {

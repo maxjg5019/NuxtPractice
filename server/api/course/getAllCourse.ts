@@ -1,6 +1,5 @@
 import { MongoClient } from 'mongodb';
 import type { course } from '~/server/models/courseModel';
-import type { user } from '~/server/models/userModel';
 
 const config = useRuntimeConfig();
 const client = new MongoClient(config.MONGODB_URI);

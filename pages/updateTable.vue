@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <updateTable />
+
 </template>
 
 <style scoped></style>

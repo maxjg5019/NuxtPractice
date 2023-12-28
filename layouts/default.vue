@@ -30,9 +30,12 @@ const userLogout = async () => {
                     <nuxt-link to="/courseList">課程列表</nuxt-link>
                 </a-menu-item>
                 <a-menu-item key="4">
+                    <nuxt-link to="/studentList">成員列表</nuxt-link>
+                </a-menu-item>
+                <a-menu-item key="5">
                     <nuxt-link to="/about">關於</nuxt-link>
                 </a-menu-item>
-                <a-menu-item key="5" @click="userLogout">帳號登出</a-menu-item>
+                <a-menu-item key="6" @click="userLogout">帳號登出</a-menu-item>
             </a-menu>
         </a-layout-header>
         <a-layout-content style="padding: 0 50px">
