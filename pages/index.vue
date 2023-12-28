@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <CardsNew />
+  <AllStudentCourseList />
 </template>
 
 <style scoped></style>
