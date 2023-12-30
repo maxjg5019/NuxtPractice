@@ -23,7 +23,7 @@ const userLogout = async () => {
                 </a-menu-item>
                 <a-menu-item key="2">
                     <!-- TODO:只有學生端可操作 -->
-                    <nuxt-link to="/updateTable">修改個人課表</nuxt-link>
+                    <nuxt-link to="/personalCourseTable">個人課表</nuxt-link>
                 </a-menu-item>
                 <a-menu-item key="3">
                     <!-- TODO:只有Admin端可操作 -->

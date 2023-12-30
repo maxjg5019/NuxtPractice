@@ -18,6 +18,11 @@ export interface getAllCourseReponse {
   message: string;
 }
 
+export interface signUpCourseReqeust {
+  studentId: string;
+  courseId: string;
+}
+
 export const addCourse = async (courseInfo: course) => {
   console.log('getCourseTableData 新增課程的request', courseInfo);
   const data = await $fetch('/api/course/addCourse', {
@@ -48,6 +53,19 @@ export const getStudentCourse = async (studentID: string) => {
   const data = await $fetch('/api/course/getStudentCourse', {
     method: 'POST',
     body: studentID,
+  });
+  return data;
+};
+
+export const signUpCourse = async (studentIdRequest: string, courseIdRequest: string) => {
+  const reqeustData: signUpCourseReqeust = {
+    studentId: studentIdRequest,
+    courseId: courseIdRequest,
+  };
+  console.log('getCourseTableData 新增課程的request', reqeustData);
+  const data = await $fetch('/api/course/signUpCourse', {
+    method: 'POST',
+    body: reqeustData,
   });
   return data;
 };

@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 /**
  * @description: 課程 DB 資料格式
  * @param name - 課程名稱
@@ -17,4 +19,9 @@ export interface course {
 interface courseDate {
   weekDay: number;
   period: number;
+}
+
+export interface signUpCourseReqeust{
+  studentId: string;
+  courseId: string;
 }
