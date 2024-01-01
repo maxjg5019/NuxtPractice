@@ -24,3 +24,8 @@ export interface signUpCourseReqeust{
   studentId: string;
   courseId: string;
 }
+
+export interface dropUpCourseReqeust{
+  studentId: string;
+  courseId: string;
+}

@@ -130,13 +130,17 @@ function courseInfoToTableData(courseIndos: courseInfo[]): void {
     });
     finalData.value = tableData;
 }
-console.log("最後的資料", finalData.value);
+onMounted(() => {
+    console.log("最後的資料", finalData.value);
+});
 </script>
 
 <template>
-    <div style="margin-bottom: 20px;">
+
+    <a-space size="middle" style="margin-bottom: 20px;">
         <SignUpCourse />
-    </div>
+        <DropCourse />
+    </a-space>
 
     <a-spin :spinning="finalData == null">
         <a-table :columns="columns" :data-source="finalData" bordered :pagination="false"></a-table>
