@@ -35,7 +35,9 @@ const handleOk = async () => {
 
         if (result?.success) {
             message.success(result.message);
-            reloadNuxtApp();
+            setTimeout(() => {
+                reloadNuxtApp({ ttl: 500 });
+            }, 500);
         } else {
             message.error(result?.message);
         }

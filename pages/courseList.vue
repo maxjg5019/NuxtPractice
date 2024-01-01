@@ -57,7 +57,9 @@ const callDeleteCourse = async (courseId: string) => {
     const result = await deleteCourse(courseId);
     if (result?.success) {
         message.success(result.message);
-        reloadNuxtApp();
+        setTimeout(() => {
+            reloadNuxtApp({ ttl: 500 });
+        }, 500);
     } else {
         message.error(result?.message);
     }
