@@ -63,7 +63,7 @@ function transformRawCourseData(courseData: any) {
     return courseData.map((course: any, index: number) => {
         return {
             key: (index + 1).toString(),
-            courseName: course.name,
+            courseName: course.name.concat(' - ', course.teacher),
             courseDate: course.courseDate.map((date: any) => {
                 return {
                     weekDay: date.weekDay,
@@ -83,8 +83,6 @@ if (rawCourseData?.success) {
     const convertData = transformRawCourseData(rawCourseData.data);
     courseInfoToTableData(convertData);
 }
-
-
 
 function courseInfoToTableData(courseIndos: courseInfo[]): void {
     const tableData: tableData[] = [];
