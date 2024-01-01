@@ -52,11 +52,11 @@ const columns = [
 interface tableData {
     key: string;
     period: string;
-    monday: string[];
-    tuesday: string[];
-    wednesday: string[];
-    thursday: string[];
-    friday: string[];
+    monday: string;
+    tuesday: string;
+    wednesday: string;
+    thursday: string;
+    friday: string;
 }
 
 function transformRawCourseData(courseData: any) {
@@ -78,7 +78,7 @@ const finalData = ref<tableData[]>([]);
 const loginStore = useLoginStore();
 const studentId = loginStore.studentID;
 const rawCourseData = await getStudentCourse(studentId!);
-console.log("學生課表資料", rawCourseData);
+
 if (rawCourseData?.success) {
     const convertData = transformRawCourseData(rawCourseData.data);
     courseInfoToTableData(convertData);
@@ -94,11 +94,11 @@ function courseInfoToTableData(courseIndos: courseInfo[]): void {
         tableData.push({
             key: i.toString(),
             period: (i + 1).toString(),
-            monday: [],
-            tuesday: [],
-            wednesday: [],
-            thursday: [],
-            friday: [],
+            monday: '',
+            tuesday: '',
+            wednesday: '',
+            thursday: '',
+            friday: '',
         });
     }
 
@@ -107,19 +107,19 @@ function courseInfoToTableData(courseIndos: courseInfo[]): void {
         eachCourse.courseDate.forEach((eachCourseDate) => {
             switch (eachCourseDate.weekDay) {
                 case 1:
-                    tableData[eachCourseDate.period - 1].monday.push(eachCourse.courseName);
+                    tableData[eachCourseDate.period - 1].monday = (eachCourse.courseName);
                     break;
                 case 2:
-                    tableData[eachCourseDate.period - 1].tuesday.push(eachCourse.courseName);
+                    tableData[eachCourseDate.period - 1].tuesday = (eachCourse.courseName);
                     break;
                 case 3:
-                    tableData[eachCourseDate.period - 1].wednesday.push(eachCourse.courseName);
+                    tableData[eachCourseDate.period - 1].wednesday = (eachCourse.courseName);
                     break;
                 case 4:
-                    tableData[eachCourseDate.period - 1].thursday.push(eachCourse.courseName);
+                    tableData[eachCourseDate.period - 1].thursday = (eachCourse.courseName);
                     break;
                 case 5:
-                    tableData[eachCourseDate.period - 1].friday.push(eachCourse.courseName);
+                    tableData[eachCourseDate.period - 1].friday = (eachCourse.courseName);
                     break;
             }
         });
@@ -130,7 +130,7 @@ function courseInfoToTableData(courseIndos: courseInfo[]): void {
     });
     finalData.value = tableData;
 }
-
+console.log("最後的資料", finalData.value);
 </script>
 
 <template>
