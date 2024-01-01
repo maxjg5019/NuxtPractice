@@ -18,6 +18,12 @@ export interface getAllCourseReponse {
   message: string;
 }
 
+export interface studentCourseReponse {
+  success: boolean;
+  data: courseTableInfo[];
+  message: string;
+}
+
 export interface signUpCourseReqeust {
   studentId: string;
   courseId: string;
@@ -48,16 +54,20 @@ export const getAllCourse = async (): Promise<getAllCourseReponse> => {
   return data as getAllCourseReponse;
 };
 
-export const getStudentCourse = async (studentID: string) => {
-  console.log('學號', studentID);
+export const getStudentCourse = async (
+  studentId: string
+): Promise<studentCourseReponse> => {
   const data = await $fetch('/api/course/getStudentCourse', {
     method: 'POST',
-    body: studentID,
+    body: studentId,
   });
-  return data;
+  return data as studentCourseReponse;
 };
 
-export const signUpCourse = async (studentIdRequest: string, courseIdRequest: string) => {
+export const signUpCourse = async (
+  studentIdRequest: string,
+  courseIdRequest: string
+) => {
   const reqeustData: signUpCourseReqeust = {
     studentId: studentIdRequest,
     courseId: courseIdRequest,

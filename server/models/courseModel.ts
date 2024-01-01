@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 
 /**
  * @description: 課程 DB 資料格式

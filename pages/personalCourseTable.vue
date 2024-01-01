@@ -1,5 +1,7 @@
-<script lang="tsx" setup>
+<script lang="ts" setup>
 //我也不熟 jsx 跟 tsx ，反正就是讓 script 可以塞 HTML 的酷東西
+import { useLoginStore } from '@/store/auth';
+import { getStudentCourse } from '~/composables/api/course';
 
 interface courseInfo {
     key: string;
@@ -57,156 +59,32 @@ interface tableData {
     friday: string[];
 }
 
-//模擬從DB取得的資料
-const newColmns: courseInfo[] = [
-    {
-        key: '1',
-        courseName: '課程 A',
-        courseDate: [
-            {
-                weekDay: 1,
-                period: 1,
-            },
-            {
-                weekDay: 1,
-                period: 2,
-            },
-            {
-                weekDay: 1,
-                period: 3,
-            },
-        ],
-    },
-    {
-        key: '2',
-        courseName: '課程 B',
-        courseDate: [
-            {
-                weekDay: 4,
-                period: 2,
-            },
-        ],
-    },
-    {
-        key: '3',
-        courseName: '課程 C',
-        courseDate: [
-            {
-                weekDay: 2,
-                period: 3,
-            },
-        ],
-    },
-    {
-        key: '4',
-        courseName: '課程 D',
-        courseDate: [
-            {
-                weekDay: 1,
-                period: 4,
-            },
-        ],
-    },
-    {
-        key: '5',
-        courseName: '課程 E',
-        courseDate: [
-            {
-                weekDay: 3,
-                period: 5,
-            },
-        ],
-    },
-    {
-        key: '6',
-        courseName: '課程 F',
-        courseDate: [
-            {
-                weekDay: 5,
-                period: 6,
-            },
-        ],
-    },
-    {
-        key: '7',
-        courseName: '課程 G',
-        courseDate: [
-            {
-                weekDay: 4,
-                period: 7,
-            },
-        ],
-    },
-    {
-        key: '8',
-        courseName: '課程 H',
-        courseDate: [
-            {
-                weekDay: 2,
-                period: 8,
-            },
-        ],
-    },
-    {
-        key: '9',
-        courseName: '課程 I',
-        courseDate: [
-            {
-                weekDay: 1,
-                period: 9,
-            },
-        ],
-    },
-    {
-        key: '10',
-        courseName: '課程 J',
-        courseDate: [
-            {
-                weekDay: 3,
-                period: 10,
-            },
-        ],
-    },
-    {
-        key: '11',
-        courseName: '課程 A1',
-        courseDate: [
-            {
-                weekDay: 1,
-                period: 1,
-            },
-            {
-                weekDay: 1,
-                period: 2,
-            },
-            {
-                weekDay: 1,
-                period: 3,
-            },
-        ],
-    },
-    {
-        key: '12',
-        courseName: '課程 DTV',
-        courseDate: [
-            {
-                weekDay: 5,
-                period: 12,
-            },
-            {
-                weekDay: 5,
-                period: 13,
-            },
-            {
-                weekDay: 5,
-                period: 14,
-            },
-        ],
-    },
-];
+function transformRawCourseData(courseData: any) {
+    return courseData.map((course: any, index: number) => {
+        return {
+            key: (index + 1).toString(),
+            courseName: course.name,
+            courseDate: course.courseDate.map((date: any) => {
+                return {
+                    weekDay: date.weekDay,
+                    period: date.period,
+                };
+            }),
+        };
+    });
+}
 
 const finalData = ref<tableData[]>([]);
-courseInfoToTableData(newColmns);
+const loginStore = useLoginStore();
+const studentId = loginStore.studentID;
+const rawCourseData = await getStudentCourse(studentId!);
+console.log("學生課表資料", rawCourseData);
+if (rawCourseData?.success) {
+    const convertData = transformRawCourseData(rawCourseData.data);
+    courseInfoToTableData(convertData);
+}
+
+
 
 function courseInfoToTableData(courseIndos: courseInfo[]): void {
     const tableData: tableData[] = [];
@@ -225,7 +103,6 @@ function courseInfoToTableData(courseIndos: courseInfo[]): void {
             friday: [],
         });
     }
-    console.log("初始化", tableData);
 
     //分別將課程資料填入對應的節次表
     courseIndos.forEach((eachCourse) => {
