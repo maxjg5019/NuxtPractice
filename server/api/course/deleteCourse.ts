@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
     if (updateResult.modifiedCount > 0) {
       return { success: true, message: '課程刪除成功，用戶修課列表已更新' };
     } else {
-      return { success: false, message: '課程刪除成功，但無需更新用戶修課列表' };
+      return { success: true, message: '課程刪除成功，但無需更新用戶修課列表' };
     }
   } catch (err) {
     return { success: false, message: 'DB連線失敗' };

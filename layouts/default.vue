@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import { useLoginStore } from '@/store/auth';
 const loginStore = useLoginStore();
-const selectedKeys = ref<string[]>(['1']);
 
 const userLogout = async () => {
     loginStore.Logout();
@@ -15,7 +14,7 @@ const userLogout = async () => {
     <a-layout class="layout">
         <a-layout-header>
             <div class="logo" />
-            <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
+            <a-menu theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
                 <a-menu-item key="1">
                     <!-- TODO:Admin端會顯示所有學生加起來的課表
                         可以檢視特定學生的課表-->

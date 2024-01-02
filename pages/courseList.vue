@@ -37,6 +37,7 @@ interface tableData {
 }
 
 const finalData = ref<tableData[]>([]);
+const NTUTcoursePeriod = ['1', '2', '3', '4', 'N', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D'];
 
 onMounted(() => {
     finalData.value = allCourseData.data.map((item, index) => {
@@ -59,7 +60,7 @@ const callDeleteCourse = async (courseId: string) => {
         message.success(result.message);
         setTimeout(() => {
             reloadNuxtApp({ ttl: 500 });
-        }, 500);
+        }, 1000);
     } else {
         message.error(result?.message);
     }
