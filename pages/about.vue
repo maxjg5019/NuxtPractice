@@ -48,7 +48,7 @@
     <h1>網域URL轉發工具</h1>
 
     <a-space size="middle">
-        <NuxtImg src="/images/cloudfare.png" width="200" />
+        <NuxtImg src="/images/cloudflare.png" width="200" />
         <a-space direction="vertical">
             <a-typography-text strong>CloudFlare 是一家提供全球性網絡服務的公司，其 CloudFlare Tunnel 功能允許安全地連線網路資源到 CloudFlare 的網路，</a-typography-text>
             <a-typography-text strong>目前此網站所使用的網域名稱正是向 CloudFlare 購買的，利用架設的 CloudFlare Tunnel 可以防止網站 Ip 裸奔，</a-typography-text>
