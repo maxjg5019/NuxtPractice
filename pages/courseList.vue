@@ -37,7 +37,25 @@ interface tableData {
 }
 
 const finalData = ref<tableData[]>([]);
-const NTUTcoursePeriod = ['1', '2', '3', '4', 'N', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D'];
+interface periodMappingstruct {
+    [key: number]: string;
+}
+const periodMapping: periodMappingstruct = {
+    1: '第一節',
+    2: '第二節',
+    3: '第三節',
+    4: '第四節',
+    5: '第N節',
+    6: '第五節',
+    7: '第六節',
+    8: '第七節',
+    9: '第八節',
+    10: '第九節',
+    11: '第A節',
+    12: '第B節',
+    13: '第C節',
+    14: '第D節'
+};
 
 onMounted(() => {
     finalData.value = allCourseData.data.map((item, index) => {
@@ -47,7 +65,8 @@ onMounted(() => {
             name: item.name,
             teacher: item.teacher,
             courseTime: item.courseDate.map((courseDate) => {
-                return `星期${courseDate.weekDay}第${courseDate.period}節`;
+                const periods = periodMapping[courseDate.period];
+                return `星期${courseDate.weekDay}${periods}`;
             }).join(' - '),
         };
     });
