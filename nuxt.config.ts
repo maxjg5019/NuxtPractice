@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     '@ant-design-vue/nuxt',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
+    '@nuxt/image',
   ],
   nitro: {
     plugins: ['@/server/index'],

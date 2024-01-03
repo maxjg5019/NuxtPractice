@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
 import { useLoginStore } from '@/store/auth';
 const loginStore = useLoginStore();
 
