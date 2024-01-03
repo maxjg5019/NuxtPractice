@@ -45,7 +45,11 @@ const onFinishFailed = (errorInfo: any) => {
             </a-form-item>
 
             <a-form-item :wrapper-col="{ offset: 2, span: 16 }">
-                <a-button type="primary" html-type="submit">登入</a-button>
+                <a-space size="middle">
+                    <a-button type="primary" html-type="submit">登入</a-button>
+                    <a-button type="primary" @click="navigateTo('/register')">註冊</a-button>
+                </a-space>
+                
             </a-form-item>
 
         </a-form>
