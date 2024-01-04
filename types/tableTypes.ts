@@ -1,11 +1,11 @@
 export interface courseTableType {
   key: string;
   period: string;
-  monday: string;
-  tuesday: string;
-  wednesday: string;
-  thursday: string;
-  friday: string;
+  monday: string[];
+  tuesday: string[];
+  wednesday: string[];
+  thursday: string[];
+  friday: string[];
 }
 
 export interface courseListTable {
@@ -17,7 +17,7 @@ export interface courseListTable {
 }
 
 export interface studentTableType {
-    key: string;
-    name: string;
-    studentId: string;
+  key: string;
+  name: string;
+  studentId: string;
 }

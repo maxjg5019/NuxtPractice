@@ -2,6 +2,7 @@
 //我也不熟 jsx 跟 tsx ，反正就是讓 script 可以塞 HTML 的酷東西
 import { getAllStudents } from '~/composables/api/user';
 import { getStudentCourse } from '~/composables/api/course';
+import { dataToMutiTable } from '~/composables/table';
 import type { courseTableInfo } from '~/composables/api/course';
 
 function renderCourseItems(courseItems: string[]) {
