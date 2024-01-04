@@ -69,6 +69,13 @@ export const getStudentCourse = async (
   return data as studentCourseReponse;
 };
 
+export const getAllStudentCourse = async () => {
+  const data = await $fetch('/api/course/getAllStudentCourse', {
+    method: 'POST',
+  });
+  return data; //TODO: 先做完課程資料(course) 建立再回來接資料
+};
+
 export const signUpCourse = async (
   studentIdRequest: string,
   courseIdRequest: string
@@ -85,8 +92,10 @@ export const signUpCourse = async (
   return data;
 };
 
-export const dropCourse = async ( studentIdRequest: string,
-  courseIdRequest: string) => {
+export const dropCourse = async (
+  studentIdRequest: string,
+  courseIdRequest: string
+) => {
   const reqeustData: dropUpCourseReqeust = {
     studentId: studentIdRequest,
     courseId: courseIdRequest,
@@ -96,13 +105,4 @@ export const dropCourse = async ( studentIdRequest: string,
     body: reqeustData,
   });
   return data;
-  };
-
-export const getCourseTableData = async (studentID: string) => {
-  console.log('getCourseTableData 前端傳學號做查詢', studentID);
-  const data = await $fetch('/api/course/getAllStudentCourse', {
-    method: 'POST',
-    body: studentID,
-  });
-  return data; //TODO: 先做完課程資料(course) 建立再回來接資料
 };

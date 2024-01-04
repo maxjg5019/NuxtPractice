@@ -1,6 +1,9 @@
 <script lang="tsx" setup>
 //我也不熟 jsx 跟 tsx ，反正就是讓 script 可以塞 HTML 的酷東西
 
+import { getAllStudents } from '~/composables/api/user';
+import { getStudentCourse } from '~/composables/api/course';
+
 interface courseInfo {
   key: string;
   courseName: string;
@@ -23,7 +26,25 @@ function renderCourseItems(courseItems: string[]) {
 }
 
 const studentSelect = ref('');
+const allStudentData = await getAllStudents();
+const studentSelectList = allStudentData.data.map((item) => {
+  return {
+    name: item.name,
+    studentId: item.studentId,
+  };
+});
 
+onMounted(() => {
+  // 初始化 studentSelectList，將「所有學生」加入開頭
+  studentSelectList.unshift({
+    name: "所有學生",
+    studentId: "All"
+  });
+
+  // 設置初始選中的學生為「所有學生」
+  studentSelect.value = "All";
+  console.log('studentSelectList', studentSelectList);
+});
 
 //課程表table的欄位格式
 const columns = [
@@ -79,6 +100,19 @@ interface tableData {
 const newColmns: courseInfo[] = [
   {
     key: '1',
+    courseName: '課程 B',
+    courseDate: [
+      {
+        weekDay: 4,
+        period: 2,
+      },
+    ],
+  },
+];
+
+const newColmns2: courseInfo[] = [
+  {
+    key: '1',
     courseName: '課程 A',
     courseDate: [
       {
@@ -92,132 +126,6 @@ const newColmns: courseInfo[] = [
       {
         weekDay: 1,
         period: 3,
-      },
-    ],
-  },
-  {
-    key: '2',
-    courseName: '課程 B',
-    courseDate: [
-      {
-        weekDay: 4,
-        period: 2,
-      },
-    ],
-  },
-  {
-    key: '3',
-    courseName: '課程 C',
-    courseDate: [
-      {
-        weekDay: 2,
-        period: 3,
-      },
-    ],
-  },
-  {
-    key: '4',
-    courseName: '課程 D',
-    courseDate: [
-      {
-        weekDay: 1,
-        period: 4,
-      },
-    ],
-  },
-  {
-    key: '5',
-    courseName: '課程 E',
-    courseDate: [
-      {
-        weekDay: 3,
-        period: 5,
-      },
-    ],
-  },
-  {
-    key: '6',
-    courseName: '課程 F',
-    courseDate: [
-      {
-        weekDay: 5,
-        period: 6,
-      },
-    ],
-  },
-  {
-    key: '7',
-    courseName: '課程 G',
-    courseDate: [
-      {
-        weekDay: 4,
-        period: 7,
-      },
-    ],
-  },
-  {
-    key: '8',
-    courseName: '課程 H',
-    courseDate: [
-      {
-        weekDay: 2,
-        period: 8,
-      },
-    ],
-  },
-  {
-    key: '9',
-    courseName: '課程 I',
-    courseDate: [
-      {
-        weekDay: 1,
-        period: 9,
-      },
-    ],
-  },
-  {
-    key: '10',
-    courseName: '課程 J',
-    courseDate: [
-      {
-        weekDay: 3,
-        period: 10,
-      },
-    ],
-  },
-  {
-    key: '11',
-    courseName: '課程 A1',
-    courseDate: [
-      {
-        weekDay: 1,
-        period: 1,
-      },
-      {
-        weekDay: 1,
-        period: 2,
-      },
-      {
-        weekDay: 1,
-        period: 3,
-      },
-    ],
-  },
-  {
-    key: '12',
-    courseName: '課程 DTV',
-    courseDate: [
-      {
-        weekDay: 5,
-        period: 12,
-      },
-      {
-        weekDay: 5,
-        period: 13,
-      },
-      {
-        weekDay: 5,
-        period: 14,
       },
     ],
   },
@@ -244,7 +152,7 @@ function courseInfoToTableData(courseIndos: courseInfo[]): void {
       friday: [],
     });
   }
-  console.log("初始化", tableData);
+  // console.log("初始化", tableData);
 
   //分別將課程資料填入對應的節次表
   courseIndos.forEach((eachCourse) => {
@@ -272,17 +180,33 @@ function courseInfoToTableData(courseIndos: courseInfo[]): void {
   tableData.forEach((item, index) => {
     item.period = NTUTcoursePeriod[index];
   });
-  console.log("處理完畢", tableData);
+  // console.log("處理完畢", tableData);
   finalData.value = tableData;
 }
+
+watch(studentSelect, (Value) => {
+  if (Value === 'All') {
+    console.log('studentSelectCheck', Value);
+
+    courseInfoToTableData(newColmns);
+  } else {
+    console.log('studentSelectCheck', Value);
+    const getStudentCoures = getStudentCourse(Value.toString());
+    console.log('getStudentCoures', getStudentCoures);
+    //呼叫某支API，取得該學生的課表資料 我等等補上
+    courseInfoToTableData(newColmns2);
+  }
+});
 
 </script>
 
 <template>
   <a-space size="middle">
     <h2>選擇學生課表</h2>
-    <a-select style="width: 120px">
-      <a-select-option value="TEST">TEST</a-select-option>
+    <a-select v-model:value="studentSelect" style="width: 120px" placeholder="選擇學生">
+      <a-select-option v-for=" student in studentSelectList" :value="student.studentId" :key="student.name">
+        {{ student.name }}
+      </a-select-option>
     </a-select>
   </a-space>
 
