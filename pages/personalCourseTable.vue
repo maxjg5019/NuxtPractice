@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 //我也不熟 jsx 跟 tsx ，反正就是讓 script 可以塞 HTML 的酷東西
-import { useLoginStore } from '@/store/auth';
+import { useLoginStore } from '~/store/auth';
 import { getStudentCourse } from '~/composables/api/course';
 import { transformRawCourseData, dataToMutiTable } from '~/composables/table';
 import type { courseTableType } from '~/types/tableTypes'
