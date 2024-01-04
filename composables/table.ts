@@ -19,7 +19,7 @@ export const transformRawCourseData = (courseData: courseTableInfo[]) => {
   });
 };
 
-export const dataToMutiTable = (
+export const dataToTable = (
   courseIndos: courseTableInfo[]
 ): courseTableType[] => {
   const tableData: courseTableType[] = [];

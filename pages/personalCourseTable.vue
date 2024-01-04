@@ -2,7 +2,7 @@
 //我也不熟 jsx 跟 tsx ，反正就是讓 script 可以塞 HTML 的酷東西
 import { useLoginStore } from '~/store/auth';
 import { getStudentCourse } from '~/composables/api/course';
-import { transformRawCourseData, dataToMutiTable } from '~/composables/table';
+import { transformRawCourseData, dataToTable } from '~/composables/table';
 import type { courseTableType } from '~/types/tableTypes'
 
 //課程表table的欄位格式
@@ -47,7 +47,7 @@ const rawCourseData = await getStudentCourse(studentId!);
 
 if (rawCourseData?.success) {
     const convertData = transformRawCourseData(rawCourseData.data);
-    finalData.value = dataToMutiTable(convertData);
+    finalData.value = dataToTable(convertData);
 }
 
 onMounted(() => {
