@@ -1,19 +1,8 @@
 <script lang="tsx" setup>
 //我也不熟 jsx 跟 tsx ，反正就是讓 script 可以塞 HTML 的酷東西
-
 import { getAllStudents } from '~/composables/api/user';
 import { getStudentCourse } from '~/composables/api/course';
-
-interface courseInfo {
-  key: string;
-  courseName: string;
-  courseDate: courseDate[];
-}
-
-interface courseDate {
-  weekDay: number;
-  period: number;
-}
+import type { courseTableInfo } from '~/composables/api/course';
 
 function renderCourseItems(courseItems: string[]) {
   return (
@@ -40,7 +29,6 @@ onMounted(() => {
     name: "所有學生",
     studentId: "All"
   });
-
   // 設置初始選中的學生為「所有學生」
   studentSelect.value = "All";
   console.log('studentSelectList', studentSelectList);
@@ -97,10 +85,12 @@ interface tableData {
 }
 
 //模擬從DB取得的資料
-const newColmns: courseInfo[] = [
+const mockData: courseTableInfo[] = [
   {
     key: '1',
-    courseName: '課程 B',
+    _id: '',
+    name: '課程 B',
+    teacher: '',
     courseDate: [
       {
         weekDay: 4,
@@ -110,34 +100,12 @@ const newColmns: courseInfo[] = [
   },
 ];
 
-const newColmns2: courseInfo[] = [
-  {
-    key: '1',
-    courseName: '課程 A',
-    courseDate: [
-      {
-        weekDay: 1,
-        period: 1,
-      },
-      {
-        weekDay: 1,
-        period: 2,
-      },
-      {
-        weekDay: 1,
-        period: 3,
-      },
-    ],
-  },
-];
-
 const finalData = ref<tableData[]>([]);
-courseInfoToTableData(newColmns);
+courseInfoToTableData(mockData);
 
-function courseInfoToTableData(courseIndos: courseInfo[]): void {
+function courseInfoToTableData(courseIndos: courseTableInfo[]): void {
   const tableData: tableData[] = [];
 
-  // 資料型態的節次        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'];
   const NTUTcoursePeriod = ['1', '2', '3', '4', 'N', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D'];
 
   //初始化每周的節次表
@@ -159,19 +127,19 @@ function courseInfoToTableData(courseIndos: courseInfo[]): void {
     eachCourse.courseDate.forEach((eachCourseDate) => {
       switch (eachCourseDate.weekDay) {
         case 1:
-          tableData[eachCourseDate.period - 1].monday.push(eachCourse.courseName);
+          tableData[eachCourseDate.period - 1].monday.push(eachCourse.name);
           break;
         case 2:
-          tableData[eachCourseDate.period - 1].tuesday.push(eachCourse.courseName);
+          tableData[eachCourseDate.period - 1].tuesday.push(eachCourse.name);
           break;
         case 3:
-          tableData[eachCourseDate.period - 1].wednesday.push(eachCourse.courseName);
+          tableData[eachCourseDate.period - 1].wednesday.push(eachCourse.name);
           break;
         case 4:
-          tableData[eachCourseDate.period - 1].thursday.push(eachCourse.courseName);
+          tableData[eachCourseDate.period - 1].thursday.push(eachCourse.name);
           break;
         case 5:
-          tableData[eachCourseDate.period - 1].friday.push(eachCourse.courseName);
+          tableData[eachCourseDate.period - 1].friday.push(eachCourse.name);
           break;
       }
     });
@@ -180,21 +148,23 @@ function courseInfoToTableData(courseIndos: courseInfo[]): void {
   tableData.forEach((item, index) => {
     item.period = NTUTcoursePeriod[index];
   });
-  // console.log("處理完畢", tableData);
   finalData.value = tableData;
 }
 
-watch(studentSelect, (Value) => {
+watch(studentSelect, async (Value) => {
   if (Value === 'All') {
     console.log('studentSelectCheck', Value);
 
-    courseInfoToTableData(newColmns);
+    courseInfoToTableData(mockData);
   } else {
-    console.log('studentSelectCheck', Value);
-    const getStudentCoures = getStudentCourse(Value.toString());
+    const getStudentCoures = await getStudentCourse(Value.toString());
     console.log('getStudentCoures', getStudentCoures);
-    //呼叫某支API，取得該學生的課表資料 我等等補上
-    courseInfoToTableData(newColmns2);
+
+    if ((getStudentCoures)?.success) {
+      courseInfoToTableData(getStudentCoures.data);
+    } else {
+      courseInfoToTableData([]);
+    }
   }
 });
 

@@ -1,6 +1,6 @@
 import type { course } from '~/server/models/courseModel';
 export interface courseTableInfo {
-  key: string; //這個從DB取出資料後再加上去
+  key: string;
   _id: string;
   name: string;
   teacher: string;
@@ -35,7 +35,6 @@ export interface dropUpCourseReqeust {
 }
 
 export const addCourse = async (courseInfo: course) => {
-  console.log('getCourseTableData 新增課程的request', courseInfo);
   const data = await $fetch('/api/course/addCourse', {
     method: 'POST',
     body: courseInfo,
@@ -44,7 +43,6 @@ export const addCourse = async (courseInfo: course) => {
 };
 
 export const deleteCourse = async (courseId: string) => {
-  console.log('getCourseTableData 刪除課程的request', courseId);
   const data = await $fetch('/api/course/deleteCourse', {
     method: 'POST',
     body: { courseId },
@@ -84,7 +82,6 @@ export const signUpCourse = async (
     studentId: studentIdRequest,
     courseId: courseIdRequest,
   };
-  console.log('getCourseTableData 新增課程的request', reqeustData);
   const data = await $fetch('/api/course/signUpCourse', {
     method: 'POST',
     body: reqeustData,

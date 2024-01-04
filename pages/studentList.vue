@@ -1,28 +1,12 @@
 <script lang="ts" setup>
 import { getAllStudents } from '~/composables/api/user';
+import { studentColumns } from '~/constants/studentConstants';
+import type { studentTableType } from '~/types/tableTypes';
 
-const columns = [
-    {
-        title: '學生姓名',
-        dataIndex: 'name',
-        key: 'name',
-    },
-    {
-        title: '學號',
-        dataIndex: 'studentId',
-        key: 'studentId',
-    },
-];
 const allStudentData = await getAllStudents();
 console.log('allStudentData', allStudentData);
 
-interface tableData {
-    key: string;
-    name: string;
-    studentId: string;
-}
-
-const finalData = ref<tableData[]>([]);
+const finalData = ref<studentTableType[]>([]);
 
 onMounted(() => {
     finalData.value = allStudentData.data.map((item, index) => {
@@ -40,7 +24,7 @@ onMounted(() => {
     <div style="margin-bottom: 20px;">
         <a-typography-title :level="2">實驗室成員列表</a-typography-title>
     </div>
-    <a-table :columns="columns" :data-source="finalData" bordered :pagination="false" style="width: 800px ;" />
+    <a-table :columns="studentColumns" :data-source="finalData" bordered :pagination="false" style="width: 800px ;" />
 </template>
 
 <style scoped></style>
