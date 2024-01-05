@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { dropCourse, getStudentCourse } from '~/composables/api/course';
 import { useLoginStore } from '@/store/auth';
-import type { courseTableInfo } from '~/composables/api/course';
+import type { courseTableInfo, courseDate } from '~/composables/api/course';
 import { reloadNuxtApp } from "nuxt/app";
 
 const isModalVisible = ref(false);
@@ -18,9 +18,16 @@ const allCourseDataToCourseList = (data: courseTableInfo[]) => {
         };
     });
 };
-
+let allCourseList: {
+    label: string;
+    value: string;
+    date: courseDate[];
+}[] = [];
 const studentCourseData = await getStudentCourse(loginStore.studentID!);
-const allCourseList = allCourseDataToCourseList(studentCourseData.data);
+if (studentCourseData.success) {
+    allCourseList = allCourseDataToCourseList(studentCourseData.data);
+}
+
 
 const showModal = () => {
 

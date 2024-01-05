@@ -48,6 +48,8 @@ const rawCourseData = await getStudentCourse(studentId!);
 if (rawCourseData?.success) {
     const convertData = transformRawCourseData(rawCourseData.data);
     finalData.value = dataToTable(convertData);
+}else{
+    finalData.value = dataToTable([]);
 }
 
 onMounted(() => {
