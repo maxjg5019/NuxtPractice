@@ -50,7 +50,7 @@
     <a-space size="middle">
         <NuxtImg src="/images/cloudflare.png" width="200" />
         <a-space direction="vertical">
-            <a-typography-text strong>CloudFlare 是一家提供全球性網絡服務的公司，其 CloudFlare Tunnel 功能允許安全地連線網路資源到 CloudFlare 的網路，</a-typography-text>
+            <a-typography-text strong>CloudFlare 是一家提供全球性網路服務的公司，其 CloudFlare Tunnel 功能允許安全地連線網路資源到 CloudFlare 的網路，</a-typography-text>
             <a-typography-text strong>目前此網站所使用的網域名稱正是向 CloudFlare 購買的，利用架設的 CloudFlare Tunnel 可以防止網站 Ip 裸奔，</a-typography-text>
             <a-typography-text strong>且無需公開 IP 或進行複雜的配置，就能保護與加速網站訪問，同時避免 DDoS 攻擊和資料泄露，保障網站基礎安全。</a-typography-text>
         </a-space>

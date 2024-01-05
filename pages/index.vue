@@ -3,6 +3,7 @@
 import { getAllStudents } from '~/composables/api/user';
 import { getStudentCourse } from '~/composables/api/course';
 import { dataToTable } from '~/composables/table';
+import { useLoginStore } from '~/store/auth';
 import type { courseTableInfo } from '~/composables/api/course';
 import type { courseTableType } from '~/types/tableTypes'
 
@@ -25,15 +26,19 @@ const studentSelectList = allStudentData.data.map((item) => {
   };
 });
 
-onMounted(() => {
+const loginStore = useLoginStore();
+const studentId = loginStore.studentID;
+
+onMounted(async () => {
   // 初始化 studentSelectList，將「所有學生」加入開頭
-  studentSelectList.unshift({
-    name: "所有學生",
-    studentId: "All"
-  });
+  // studentSelectList.unshift({
+  //   name: "所有學生",
+  //   studentId: "All"
+  // });
   // 設置初始選中的學生為「所有學生」
-  studentSelect.value = "All";
-  console.log('studentSelectList', studentSelectList);
+  studentSelect.value = '選擇學生';
+  finalData.value = dataToTable([]);
+  // console.log('studentSelectList', studentSelectList);
 });
 
 //課程表table的欄位格式
@@ -93,23 +98,22 @@ const mockData: courseTableInfo[] = [
 ];
 
 const finalData = ref<courseTableType[]>([]);
-finalData.value = dataToTable(mockData);
 
 watch(studentSelect, async (Value) => {
-  if (Value === 'All') {
-    console.log('studentSelectCheck', Value);
+  // if (Value === 'All') {
+  //   console.log('studentSelectCheck', Value);
 
-    finalData.value = dataToTable(mockData);
+  //   finalData.value = dataToTable(mockData);
+  // } else {
+  const getStudentCoures = await getStudentCourse(Value.toString());
+  console.log('getStudentCoures', getStudentCoures);
+
+  if ((getStudentCoures)?.success) {
+    finalData.value = dataToTable(getStudentCoures.data);
   } else {
-    const getStudentCoures = await getStudentCourse(Value.toString());
-    console.log('getStudentCoures', getStudentCoures);
-
-    if ((getStudentCoures)?.success) {
-      finalData.value = dataToTable(getStudentCoures.data);
-    } else {
-      finalData.value = dataToTable([]);
-    }
+    finalData.value = dataToTable([]);
   }
+  // }
 });
 
 </script>
