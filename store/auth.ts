@@ -16,7 +16,7 @@ export const useLoginStore = defineStore('user', {
       studentIDCookie.value = studentID;
 
       this.isLoggedIn = true;
-      this.studentID = studentID;
+      this.studentID = studentID.toString();
     },
     Logout() {
       const cookie = useCookie('isLoggedIn');

@@ -33,7 +33,8 @@ const onFinishFailed = (errorInfo: any) => {
 <template>
     <div class="form-container">
         <a-form :model="userData" name="login" autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
-            <a-typography-title style="letter-spacing: 0.1em;">實驗室成員課程表系統</a-typography-title>
+            <a-typography-title style="letter-spacing: 0.1em;">基於Web實驗室成員課程表資料庫管理系統
+            </a-typography-title>
             <a-divider />
 
             <a-form-item label="帳號" name="studentId" :rules="[{ required: true, message: '請輸入你的帳號' }]">
@@ -49,7 +50,7 @@ const onFinishFailed = (errorInfo: any) => {
                     <a-button type="primary" html-type="submit">登入</a-button>
                     <a-button type="primary" @click="navigateTo('/register')">註冊</a-button>
                 </a-space>
-                
+
             </a-form-item>
 
         </a-form>
