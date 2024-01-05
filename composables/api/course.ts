@@ -58,11 +58,12 @@ export const getAllCourse = async (): Promise<getAllCourseReponse> => {
 };
 
 export const getStudentCourse = async (
-  studentId: string
+  studentIdRequest: string
 ): Promise<studentCourseReponse> => {
+  const reqeustData = { studentId: studentIdRequest };
   const data = await $fetch('/api/course/getStudentCourse', {
     method: 'POST',
-    body: studentId,
+    body: reqeustData,
   });
   return data as studentCourseReponse;
 };

@@ -1,4 +1,4 @@
-import { MongoClient,ObjectId } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import type { course } from '~/server/models/courseModel';
 import type { user } from '~/server/models/userModel';
 
@@ -7,7 +7,6 @@ const client = new MongoClient(config.MONGODB_URI);
 const dbName = 'dbFinal';
 
 export default defineEventHandler(async (event) => {
-
   const requestStudentId = await readBody(event);
   try {
     const db = client.db(dbName);
@@ -15,15 +14,15 @@ export default defineEventHandler(async (event) => {
     const courseCollection = db.collection<course>('course');
 
     const findStudent = await studentCollection.findOne({
-      studentId: requestStudentId.toString(),
+      studentId: requestStudentId.studentId,
     });
     if (findStudent == null) {
       return { success: false, message: '查無此學生' };
     } else {
-      const courseId = findStudent.courseList.map(id => new ObjectId(id));
+      const courseId = findStudent.courseList.map((id) => new ObjectId(id));
       const getCourseData = await courseCollection
         .find({
-          _id: { $in: courseId},
+          _id: { $in: courseId },
         })
         .toArray();
 
