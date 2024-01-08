@@ -44,7 +44,7 @@ const callDeleteCourse = async (courseId: string) => {
         <AddCourse />
     </a-row>
     <a-row style="margin-bottom: 20px;">
-        <a-table :columns="courseListColumns" :data-source="finalData" bordered :pagination="false" style="width: 800px ;">
+        <a-table :columns="courseListColumns" :data-source="finalData" bordered :pagination="false" >
             <template #bodyCell="{ record, column }">
                 <template v-if="column.dataIndex === 'name'">
                     {{ record.name }}

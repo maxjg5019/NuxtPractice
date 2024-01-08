@@ -4,7 +4,7 @@ export const useLoginStore = defineStore('user', {
   state: () => {
     return {
       isLoggedIn: useCookie('isLoggedIn').value || false,
-      studentID: useCookie('studentID').value || null,
+      studentID: useCookie('studentID').value?.toString() || null,
     };
   },
   actions: {
