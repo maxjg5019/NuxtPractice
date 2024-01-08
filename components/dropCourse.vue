@@ -23,19 +23,16 @@ let allCourseList: {
     value: string;
     date: courseDate[];
 }[] = [];
+
 const studentCourseData = await getStudentCourse(loginStore.studentID!);
 if (studentCourseData.success) {
     allCourseList = allCourseDataToCourseList(studentCourseData.data);
 }
 
-
 const showModal = () => {
-
     isModalVisible.value = true;
     modalTitle.value = '退選課程';
 };
-
-
 
 const handleOk = async () => {
     console.log('handleOk', selectedCourseId);
@@ -64,14 +61,11 @@ const handleCancel = () => { isModalVisible.value = false; };
     <a-button type="primary" @click="showModal">退選課程</a-button>
 
     <a-modal v-model:open="isModalVisible" :title="modalTitle" @ok="handleOk" @cancel="handleCancel">
-
         <a-select v-model:value="selectedCourseId._id" style="width:400px">
             <a-select-option v-for="item in allCourseList" :value="item.value" :key="item.value">
                 {{ item.label }}
             </a-select-option>
         </a-select>
-
-
     </a-modal>
 </template>
 

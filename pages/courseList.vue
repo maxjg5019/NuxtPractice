@@ -13,13 +13,13 @@ onMounted(() => {
     finalData.value = allCourseData.data.map((item, index) => {
         return {
             key: index.toString(),
-            _id: item._id,
             name: item.name,
             teacher: item.teacher,
             courseTime: item.courseDate.map((courseDate) => {
                 const periods = periodAdjust[courseDate.period];
                 return `星期${courseDate.weekDay}${periods}`;
             }).join(' - '),
+            _id: item._id,
         };
     });
 });
